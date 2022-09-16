@@ -10,6 +10,7 @@ project(subscriber_package)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  publisher_package
 )
 
 ## System dependencies are found with CMake's conventions
@@ -134,6 +135,11 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/subscriber_package_node.cpp)
 
+# Add a new add_executable line to tell cmake the name of the executable to make
+# (publisher_node) and the location of the source code. (The publisher_code.cpp file
+# in the src subdirectory of the package.
+add_executable(subscriber_node src/subscriber_code.cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -143,6 +149,7 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(subscriber_node ${catkin_LIBRARIES})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
